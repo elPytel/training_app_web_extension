@@ -7,7 +7,7 @@
       <head>
         <meta charset="utf-8"/>
         <title>Cvičení</title>
-        <link rel="stylesheet" href="styles.css"/>
+        <link rel="stylesheet" href="../styles.css"/>
       </head>
       <body>
         <div class="container">
@@ -15,7 +15,8 @@
             <h1>Cvičení</h1>
             <p>Generováno XSLT z XML se seznamem cvičení.</p>
           </header>
-          <xsl:apply-templates select="root/item"/>
+          <!-- support both older flat files (root/item) and new schema (root/exerciseDefinitions/item) -->
+          <xsl:apply-templates select="root/item | root/exerciseDefinitions/item"/>
         </div>
       </body>
     </html>
@@ -34,9 +35,17 @@
         <p><xsl:value-of select="normalize-space(description)"/></p>
       </div>
 
-      <xsl:if test="mediaUrl and string-length(normalize-space(mediaUrl)) &gt; 0">
+      <!-- support media either as direct mediaUrl or wrapped in <media><mediaUrl> -->
+      <xsl:if test="(media/mediaUrl and string-length(normalize-space(media/mediaUrl)) &gt; 0) or (mediaUrl and string-length(normalize-space(mediaUrl)) &gt; 0)">
         <div class="media">
-          <img class="media" src="{mediaUrl}" alt="{name}"/>
+          <xsl:choose>
+            <xsl:when test="media/mediaUrl and string-length(normalize-space(media/mediaUrl)) &gt; 0">
+              <img class="media" src="{media/mediaUrl}" alt="{name}"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <img class="media" src="{mediaUrl}" alt="{name}"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </div>
       </xsl:if>
 
@@ -52,7 +61,11 @@
       </xsl:if>
 
       <div class="meta">
-        <strong>ID:</strong> <xsl:value-of select="id"/>
+        <strong>ID:</strong>
+        <xsl:choose>
+          <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+          <xsl:otherwise><xsl:value-of select="id"/></xsl:otherwise>
+        </xsl:choose>
       </div>
     </section>
   </xsl:template>

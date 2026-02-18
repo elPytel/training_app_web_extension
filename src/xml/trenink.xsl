@@ -2,8 +2,8 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="html" encoding="utf-8" indent="yes"/>
 
-  <!-- key to lookup exercise definition by id -->
-  <xsl:key name="def-by-id" match="root/exerciseDefinitions/item" use="id"/>
+  <!-- key to lookup exercise definition by id (id is attribute now) -->
+  <xsl:key name="def-by-id" match="root/exerciseDefinitions/item" use="@id"/>
 
   <xsl:template match="/">
     <html>
@@ -15,7 +15,7 @@
             <xsl:otherwise>Training</xsl:otherwise>
           </xsl:choose>
         </title>
-        <link rel="stylesheet" href="styles.css"/>
+        <link rel="stylesheet" href="../styles.css"/>
       </head>
       <body>
         <div class="container">
@@ -49,7 +49,7 @@
                     </ul>
                   </div>
                 </xsl:if>
-                <div class="meta"><strong>ID:</strong> <xsl:value-of select="id"/></div>
+                <div class="meta"><strong>ID:</strong> <xsl:value-of select="@id"/></div>
               </section>
             </xsl:for-each>
           </section>
@@ -82,7 +82,7 @@
                             </ul>
                           </div>
                         </xsl:if>
-                        <div class="meta"><strong>ID:</strong> <xsl:value-of select="$def/id"/></div>
+                        <div class="meta"><strong>ID:</strong> <xsl:value-of select="$def/@id"/></div>
                       </section>
                     </xsl:when>
                     <xsl:otherwise>

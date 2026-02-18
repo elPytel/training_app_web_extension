@@ -1,69 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
-  <xs:simpleType name="TrueFalseString">
+  <!-- Accept common boolean representations so existing XML like "False" still validates -->
+  <xs:simpleType name="BoolString">
     <xs:restriction base="xs:string">
-      <xs:pattern value="True|False"/>
+      <xs:pattern value="True|False|true|false|0|1"/>
     </xs:restriction>
   </xs:simpleType>
 
+  <!-- ExerciseCategory enum -->
+  <xs:simpleType name="ExerciseCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CARDIO"/>
+      <xs:enumeration value="STRENGTH"/>
+      <xs:enumeration value="MOBILITY"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- MediaType enum -->
+  <xs:simpleType name="MediaCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NONE"/>
+      <xs:enumeration value="IMAGE_URL"/>
+      <xs:enumeration value="IMAGE_GALLERY"/>
+      <xs:enumeration value="YOUTUBE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- (Optional) MuscleGroup enum left in file for reference, not used for muscleGroups list -->
+  <xs:simpleType name="MuscleGroup">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CHEST"/>
+      <xs:enumeration value="SHOULDERS"/>
+      <xs:enumeration value="LOWER_BACK"/>
+      <xs:enumeration value="RHOMBOIDS"/>
+      <xs:enumeration value="LATS"/>
+      <xs:enumeration value="QUADS"/>
+      <xs:enumeration value="HAMSTRINGS"/>
+      <xs:enumeration value="ABS"/>
+      <xs:enumeration value="CALVES"/>
+      <xs:enumeration value="BICEPS"/>
+      <xs:enumeration value="TRICEPS"/>
+      <xs:enumeration value="GLUTES"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- -->
+  <xs:complexType name="MediaType">
+    <xs:sequence>
+      <xs:element name="mediaType" type="MediaCategory"/>
+      <xs:element name="mediaUrl" type="xs:string" minOccurs="0" nillable="true"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Exercise type reflecting the Kotlin data class -->
+  <xs:complexType name="ExerciseType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="category" type="ExerciseCategory"/>
+      <xs:element name="description" type="xs:string" minOccurs="0" nillable="true"/>
+      <xs:element name="media" type="MediaType" minOccurs="0"/>
+      <xs:element name="muscleGroups" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="item" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="isDefault" type="BoolString" default="false"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+
+
+  <!-- Root and containers (kept compatible with existing trenink.xml structure) -->
   <xs:element name="root">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="exerciseDefinitions">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="category" type="xs:string"/>
-                    <xs:element name="description" type="xs:string"/>
-                    <xs:element name="id" type="xs:string"/>
-                    <xs:element name="isDefault" type="TrueFalseString"/>
-                    <xs:element name="mediaType" type="xs:string"/>
-                    <xs:element name="mediaUrl" type="xs:string" minOccurs="0" nillable="true"/>
-                    <xs:element name="muscleGroups">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="item" type="xs:string" maxOccurs="unbounded"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                    <xs:element name="name" type="xs:string"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
+              <xs:element name="item" type="ExerciseType" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
 
-        <xs:element name="exercisesInUnit">
+        <xs:element name="exercisesInUnit" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="exerciseId" type="xs:string"/>
-                    <xs:element name="id" type="xs:string"/>
-                    <xs:element name="isDistanceEnabled" type="TrueFalseString"/>
-                    <xs:element name="isRepsEnabled" type="TrueFalseString"/>
-                    <xs:element name="isRestEnabled" type="TrueFalseString"/>
-                    <xs:element name="isRirEnabled" type="TrueFalseString"/>
-                    <xs:element name="isTimeEnabled" type="TrueFalseString"/>
-                    <xs:element name="isWeightEnabled" type="TrueFalseString"/>
+                    <xs:element name="isDistanceEnabled" type="BoolString"/>
+                    <xs:element name="isRepsEnabled" type="BoolString"/>
+                    <xs:element name="isRestEnabled" type="BoolString"/>
+                    <xs:element name="isRirEnabled" type="BoolString"/>
+                    <xs:element name="isTimeEnabled" type="BoolString"/>
+                    <xs:element name="isWeightEnabled" type="BoolString"/>
                     <xs:element name="orderIndex" type="xs:integer"/>
                     <xs:element name="reps" type="xs:integer"/>
                     <xs:element name="rest" type="xs:integer"/>
                     <xs:element name="sets" type="xs:integer"/>
                     <xs:element name="trainingUnitId" type="xs:string"/>
                   </xs:sequence>
+                  <xs:attribute name="id" type="xs:string" use="required"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
 
-        <xs:element name="unit">
+        <xs:element name="unit" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="clientId" type="xs:string"/>

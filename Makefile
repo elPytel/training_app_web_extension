@@ -5,8 +5,10 @@ SRC_JSON_DIR := src/json
 SRC_XML_DIR := src/xml
 SRC_PY_DIR := src/python
 SRC_STYLE_DIR := src/style
+SRC_SCRIPT_DIR := src/scripts
 HTML_DIR := generated/html
 XML_DIR := generated/xml
+DATA_DIR := data
 
 # Colors for output
 RED    := $(shell printf '\033[0;31m')
@@ -39,23 +41,14 @@ json2xml: | ${XML_DIR}
 		echo "$(CYAN)Generated $(BLUE)${XML_DIR}/$$base.xml$(RESET) from $$f"; \
 	done'
 
-xml2html: json2xml | ${HTML_DIR}
-	@echo "$(YELLOW)Converting$(RESET) XML files to HTML..."
-	@sh -c 'for f in ${XML_DIR}/*.xml; do \
-		[ -e "$$f" ] || continue; \
-		base=$$(basename "$$f" .xml); \
-		# choose matching XSLT (.xsl or .xslt) next to source XML, else fallback to default \
-		xslt="${SRC_XML_DIR}/$$base.xsl"; \
-		if [ ! -f "$$xslt" ]; then \
-			if [ -f "${SRC_XML_DIR}/$$base.xslt" ]; then \
-				xslt="${SRC_XML_DIR}/$$base.xslt"; \
-			else \
-				xslt="${SRC_XML_DIR}/exercises.xsl"; \
-			fi; \
-		fi; \
-		xsltproc "$$xslt" "$$f" > ${HTML_DIR}/"$$base".html; \
-		echo "$(CYAN)Generated $(BLUE)${HTML_DIR}/$$base.html$(RESET) from $$f using $$xslt"; \
-	done'; \
+xml-lint: | ${XML_DIR}
+	@echo "$(YELLOW)Linting$(RESET) XML files via scripts/xml-lint.sh..."
+	@bash ${SRC_SCRIPT_DIR}/xml-lint.sh ${XML_DIR} src/xml/trenink.xsd || (echo "$(RED)Some XML files failed validation$(RESET)" && exit 1)
+	@bash ${SRC_SCRIPT_DIR}/xml-lint.sh ${DATA_DIR} src/xml/trenink.xsd || (echo "$(RED)Some XML files failed validation$(RESET)" && exit 1)
+
+xml2html: xml-lint | ${HTML_DIR}
+	@echo "$(YELLOW)Converting$(RESET) XML files to HTML via src/scripts/xml2html.sh..."
+	@bash ${SRC_SCRIPT_DIR}/xml2html.sh ${DATA_DIR} ${HTML_DIR} ${SRC_XML_DIR} || (echo "$(RED)HTML conversion failed$(RESET)" && exit 1)
 
 # copy styles into HTML dir so generated pages can reference them
 copy-styles: | ${HTML_DIR}
@@ -69,13 +62,7 @@ copy-styles: | ${HTML_DIR}
 
 html-index: | ${HTML_DIR}
 	@echo "$(YELLOW)Generating$(RESET) index.html for HTML files..."
-	@sh -c 'echo "<!doctype html><html><head><meta charset=\"utf-8\"><title>Cvičení index</title></head><body><h1>Cvičení</h1><ul>" > ${HTML_DIR}/index.html; \
-	for h in ${HTML_DIR}/*.html; do \
-		[ "$$h" = "${HTML_DIR}/index.html" ] && continue; \
-		name=$$(basename "$$h"); \
-		echo "<li><a href=\"$$name\">$$name</a></li>" >> ${HTML_DIR}/index.html; \
-	done; \
-	echo "</ul></body></html>" >> ${HTML_DIR}/index.html'
+	@bash ${SRC_SCRIPT_DIR}/generate-html-index.sh ${HTML_DIR} || (echo "$(RED)Index generation failed$(RESET)" && exit 1)
 
 html: copy-styles xml2html html-index | ${HTML_DIR} ${XML_DIR} 
 	@echo "$(GREEN)All HTML files generated successfully.$(RESET)"

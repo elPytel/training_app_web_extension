@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+    <exerciseDefinitions>
+        <item id="afce9d15-6dec-4e58-bd8e-27c4bed4a0ff">
+            <name>Dřep Do Strany TRX</name>
+            <category>STRENGTH</category>
+            <description>přidržuji se TRX, rozestup, dřep na jednu nohu</description>
+            <media>
+                <mediaType>NONE</mediaType>
+            </media>
+            <muscleGroups>
+                <item>Hýždě</item>
+                <item>Přední stehna</item>
+            </muscleGroups>
+            <isDefault>False</isDefault>
+        </item>
+        <item id="figure_four_glute_stretch">
+            <name>Protažení hýždí v leže (Čtyřka)</name>
+            <category>MOBILITY</category>
+            <description>Lehni si na záda. Kotník jedné nohy polož na koleno druhé (vytvoř tvar
+                čísla 4). Chytni spodní nohu pod kolenem oběma rukama a přitáhni ji k hrudníku,
+                dokud neucítíš tah v hýždi.</description>
+            <media>
+                <mediaType>NONE</mediaType>
+                <mediaUrl />
+            </media>
+            <muscleGroups>
+                <item>Hýždě</item>
+            </muscleGroups>
+            <isDefault>True</isDefault>
+        </item>
+        <item id="foam_roll_chest">
+            <name>Masáž prsních svalů válcem</name>
+            <category>MOBILITY</category>
+            <description>Lehni si na břicho a umísti masážní válec pod prsní sval (blízko podpaží).
+                Paži natáhni do strany a pomalými pohyby roluj po svalu. Můžeš také paží hýbat
+                nahoru a dolů pro větší efekt.</description>
+            <media>
+                <mediaType>NONE</mediaType>
+                <mediaUrl />
+            </media>
+            <muscleGroups>
+                <item>Hrudník</item>
+            </muscleGroups>
+            <isDefault>True</isDefault>
+        </item>
+        <item id="foam_roll_glutes">
+            <name>Masáž hýždí válcem</name>
+            <category>MOBILITY</category>
+            <description>Sedni si na válec. Jednu nohu překřiž přes druhou (kotník na koleno).
+                Nakloň se vahou na stranu hýždě pokrčené nohy a roluj přes bolestivá místa.</description>
+            <media>
+                <mediaType>NONE</mediaType>
+                <mediaUrl />
+            </media>
+            <muscleGroups>
+                <item>Hýždě</item>
+            </muscleGroups>
+            <isDefault>True</isDefault>
+        </item>
+        <item id="shoulder_pass_throughs">
+            <name>Rotace ramen s tyčí</name>
+            <category>MOBILITY</category>
+            <description>Uchop tyč nebo gumu velmi širokým úchopem. S propnutými lokty přenášej tyč
+                obloukem přes hlavu až k hýždím a zpět. Pokud se lokty krčí, rozšiř úchop.</description>
+            <media>
+                <mediaType>NONE</mediaType>
+                <mediaUrl />
+            </media>
+            <muscleGroups>
+                <item>Ramena</item>
+                <item>Hrudník</item>
+            </muscleGroups>
+            <isDefault>True</isDefault>
+        </item>
+        <item id="weighted_ankle_stretch">
+            <name>Protažení kotníku se závažím</name>
+            <category>MOBILITY</category>
+            <description>V kleče na jednom koleni (pozice výpadu) si polož závaží (kettlebell nebo
+                kotouč) na stehno přední nohy těsně za koleno. Tlač koleno vpřed přes špičku, ale
+                patu drž stále na zemi.</description>
+            <media>
+                <mediaType>NONE</mediaType>
+                <mediaUrl />
+            </media>
+            <muscleGroups>
+                <item>Lýtka</item>
+            </muscleGroups>
+            <isDefault>True</isDefault>
+        </item>
+    </exerciseDefinitions>
+    <exercisesInUnit>
+        <item id="99">
+            <exerciseId>foam_roll_glutes</exerciseId>
+            <isDistanceEnabled>False</isDistanceEnabled>
+            <isRepsEnabled>False</isRepsEnabled>
+            <isRestEnabled>False</isRestEnabled>
+            <isRirEnabled>False</isRirEnabled>
+            <isTimeEnabled>False</isTimeEnabled>
+            <isWeightEnabled>False</isWeightEnabled>
+            <orderIndex>1</orderIndex>
+            <reps>10</reps>
+            <rest>90</rest>
+            <sets>1</sets>
+            <trainingUnitId>d6d306a2-2493-4a35-a209-3913ecb46001</trainingUnitId>
+        </item>
+        <item id="100">
+            <exerciseId>foam_roll_chest</exerciseId>
+            <isDistanceEnabled>False</isDistanceEnabled>
+            <isRepsEnabled>False</isRepsEnabled>
+            <isRestEnabled>False</isRestEnabled>
+            <isRirEnabled>False</isRirEnabled>
+            <isTimeEnabled>False</isTimeEnabled>
+            <isWeightEnabled>False</isWeightEnabled>
+            <orderIndex>2</orderIndex>
+            <reps>10</reps>
+            <rest>90</rest>
+            <sets>1</sets>
+            <trainingUnitId>d6d306a2-2493-4a35-a209-3913ecb46001</trainingUnitId>
+        </item>
+        <item id="101">
+            <exerciseId>weighted_ankle_stretch</exerciseId>
+            <isDistanceEnabled>False</isDistanceEnabled>
+            <isRepsEnabled>False</isRepsEnabled>
+            <isRestEnabled>False</isRestEnabled>
+            <isRirEnabled>False</isRirEnabled>
+            <isTimeEnabled>False</isTimeEnabled>
+            <isWeightEnabled>False</isWeightEnabled>
+            <orderIndex>3</orderIndex>
+            <reps>10</reps>
+            <rest>90</rest>
+            <sets>1</sets>
+            <trainingUnitId>d6d306a2-2493-4a35-a209-3913ecb46001</trainingUnitId>
+        </item>
+        <item id="102">
+            <exerciseId>figure_four_glute_stretch</exerciseId>
+            <isDistanceEnabled>False</isDistanceEnabled>
+            <isRepsEnabled>False</isRepsEnabled>
+            <isRestEnabled>False</isRestEnabled>
+            <isRirEnabled>False</isRirEnabled>
+            <isTimeEnabled>False</isTimeEnabled>
+            <isWeightEnabled>False</isWeightEnabled>
+            <orderIndex>4</orderIndex>
+            <reps>10</reps>
+            <rest>90</rest>
+            <sets>1</sets>
+            <trainingUnitId>d6d306a2-2493-4a35-a209-3913ecb46001</trainingUnitId>
+        </item>
+        <item id="103">
+            <exerciseId>shoulder_pass_throughs</exerciseId>
+            <isDistanceEnabled>False</isDistanceEnabled>
+            <isRepsEnabled>True</isRepsEnabled>
+            <isRestEnabled>False</isRestEnabled>
+            <isRirEnabled>False</isRirEnabled>
+            <isTimeEnabled>False</isTimeEnabled>
+            <isWeightEnabled>False</isWeightEnabled>
+            <orderIndex>5</orderIndex>
+            <reps>10</reps>
+            <rest>90</rest>
+            <sets>1</sets>
+            <trainingUnitId>d6d306a2-2493-4a35-a209-3913ecb46001</trainingUnitId>
+        </item>
+        <item id="104">
+            <exerciseId>afce9d15-6dec-4e58-bd8e-27c4bed4a0ff</exerciseId>
+            <isDistanceEnabled>False</isDistanceEnabled>
+            <isRepsEnabled>True</isRepsEnabled>
+            <isRestEnabled>False</isRestEnabled>
+            <isRirEnabled>False</isRirEnabled>
+            <isTimeEnabled>False</isTimeEnabled>
+            <isWeightEnabled>False</isWeightEnabled>
+            <orderIndex>6</orderIndex>
+            <reps>12</reps>
+            <rest>90</rest>
+            <sets>2</sets>
+            <trainingUnitId>d6d306a2-2493-4a35-a209-3913ecb46001</trainingUnitId>
+        </item>
+    </exercisesInUnit>
+    <unit>
+        <clientId>28772058-a2ea-4d8f-a960-391db64a794c</clientId>
+        <id>d6d306a2-2493-4a35-a209-3913ecb46001</id>
+        <name>Mobilita - Lenka</name>
+        <note />
+    </unit>
+</root>
