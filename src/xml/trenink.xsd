@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <xs:simpleType name="TrueFalseString">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="True|False"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="exerciseDefinitions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="category" type="xs:string"/>
+                    <xs:element name="description" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="isDefault" type="TrueFalseString"/>
+                    <xs:element name="mediaType" type="xs:string"/>
+                    <xs:element name="mediaUrl" type="xs:string" minOccurs="0" nillable="true"/>
+                    <xs:element name="muscleGroups">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="item" type="xs:string" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="name" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="exercisesInUnit">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="exerciseId" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="isDistanceEnabled" type="TrueFalseString"/>
+                    <xs:element name="isRepsEnabled" type="TrueFalseString"/>
+                    <xs:element name="isRestEnabled" type="TrueFalseString"/>
+                    <xs:element name="isRirEnabled" type="TrueFalseString"/>
+                    <xs:element name="isTimeEnabled" type="TrueFalseString"/>
+                    <xs:element name="isWeightEnabled" type="TrueFalseString"/>
+                    <xs:element name="orderIndex" type="xs:integer"/>
+                    <xs:element name="reps" type="xs:integer"/>
+                    <xs:element name="rest" type="xs:integer"/>
+                    <xs:element name="sets" type="xs:integer"/>
+                    <xs:element name="trainingUnitId" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="unit">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="clientId" type="xs:string"/>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element name="note" type="xs:string" minOccurs="0" nillable="true"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

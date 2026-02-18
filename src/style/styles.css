@@ -1,0 +1,16 @@
+/* Shared styles for exercises and training pages */
+body{font-family:Arial,Helvetica,sans-serif;margin:20px;background:#f6f7fb}
+.container{max-width:900px;margin:0 auto}
+header h1{margin:0 0 16px 0}
+.exercise{background:#fff;border:1px solid #e2e6ef;padding:16px;margin-bottom:12px;border-radius:6px}
+.exercise h2{margin:0 0 6px 0}
+.meta{color:#666;font-size:0.9em;margin-bottom:8px}
+.muscles ul{margin:6px 0 0 20px}
+img.media{max-width:200px;display:block;margin-top:8px}
+.badge{background:#3b82f6;color:#fff;padding:2px 8px;border-radius:12px;font-size:0.8em;margin-left:8px}
+
+/* small responsive tweak */
+@media (max-width:600px){
+  .container{padding:0 12px}
+  img.media{max-width:100%}
+}
