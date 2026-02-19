@@ -32,6 +32,10 @@ ${XML_DIR}:
 
 #python3 -c "import json,sys; from dicttoxml import dicttoxml as d2x; j=json.load(open('trenink_export.json', encoding='utf-8')); sys.stdout.buffer.write(b\"<?xml version='1.0' encoding='utf-8'?>\\n\" + d2x(j, custom_root='root', attr_type=False))" > trenink_export.xml
 
+install-deps:
+	@echo "$(YELLOW)Installing dependencies...$(RESET)"
+	./install.sh
+
 json2xml: | ${XML_DIR}
 	@echo "$(YELLOW)Converting$(RESET) JSON files to XML..."
 	@sh -c 'for f in ${SRC_JSON_DIR}/*.json; do \
