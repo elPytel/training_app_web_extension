@@ -4,9 +4,11 @@
 python_dependencies="pip-dependencies.txt"
 apt_dependencies="apt-dependencies.txt"
 
-echo -e "Installing apt dependencies..."
 # Install apt dependencies
+echo -e "Installing apt dependencies..."
+echo -e "Update package lists..."
 sudo apt-get update
+echo -e "Installing packages from $apt_dependencies..."
 if [ -f $apt_dependencies ]; then
     xargs sudo apt-get -y install < $apt_dependencies
 else

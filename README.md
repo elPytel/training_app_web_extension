@@ -5,6 +5,9 @@ Krátký návod a popis projektu pro generování webové prezentace cvičení.
 **Co to dělá:**
 - **Konverze:** převádí JSON → XML (skriptem) a XML → HTML pomocí XSLT.
 - **Validace:** XML soubory se validují proti XSD (`src/xml/trenink.xsd`) pomocí `xmllint`.
+- **Indexování:** generuje `index.html` s odkazy na všechny vygenerované HTML soubory.
+- **Asset management:** kopíruje statické soubory (obrázky, CSS, JS) z `data/assets/` do `generated/html/assets/`.
+- **Training app:** jednoduchá webová aplikace pro vytváření cvičení, která umožnuje stáhnout trénink jako XML.
 
 **Požadavky:**
 - `bash`, `xsltproc`, `xmllint`, `python3`
@@ -15,7 +18,8 @@ Krátký návod a popis projektu pro generování webové prezentace cvičení.
 - `generated/html/` : vygenerované HTML (výstup)
 - `src/xml/` : XSLT styly a XSD schéma
 - `src/scripts/` : pomocné skripty (`xml-lint.sh`, `xml2html.sh`, `generate-html-index.sh`)
-
+- `src/html/` : statické HTML soubory
+  
 **Rychlé použití:**
 Vygenerovat všechny HTML (kontrola, převod a index):
 ```bash

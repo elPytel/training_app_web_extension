@@ -1,7 +1,7 @@
 libxml2-utils
+coreutils
 xsltproc
 pylint
 pandoc
 fonts-symbola
 wkhtmltopdf
-md5sum
