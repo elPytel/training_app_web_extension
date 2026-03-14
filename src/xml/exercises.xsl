@@ -35,15 +35,29 @@
         <p><xsl:value-of select="normalize-space(description)"/></p>
       </div>
 
-      <!-- support media either as direct mediaUrl or wrapped in <media><mediaUrl> -->
+      <!-- support media either as direct mediaUrl or one-or-more <media> entries -->
       <xsl:if test="(media/mediaUrl and string-length(normalize-space(media/mediaUrl)) &gt; 0) or (mediaUrl and string-length(normalize-space(mediaUrl)) &gt; 0)">
         <div class="media">
           <xsl:choose>
+            <!-- multiple <media> entries: render each with a non-empty mediaUrl -->
             <xsl:when test="media/mediaUrl and string-length(normalize-space(media/mediaUrl)) &gt; 0">
-              <img class="media" src="{media/mediaUrl}" alt="{name}"/>
+              <xsl:for-each select="media[normalize-space(mediaUrl) != '']">
+                <xsl:variable name="u" select="normalize-space(mediaUrl)"/>
+                <img class="media">
+                  <xsl:attribute name="src">
+                    <xsl:value-of select="$u"/>
+                  </xsl:attribute>
+                  <xsl:attribute name="alt"><xsl:value-of select="../name"/></xsl:attribute>
+                </img>
+              </xsl:for-each>
             </xsl:when>
+            <!-- legacy direct mediaUrl element on item -->
             <xsl:otherwise>
-              <img class="media" src="{mediaUrl}" alt="{name}"/>
+              <xsl:variable name="u" select="normalize-space(mediaUrl)"/>
+              <img class="media">
+                <xsl:attribute name="src"><xsl:value-of select="$u"/></xsl:attribute>
+                <xsl:attribute name="alt"><xsl:value-of select="name"/></xsl:attribute>
+              </img>
             </xsl:otherwise>
           </xsl:choose>
         </div>

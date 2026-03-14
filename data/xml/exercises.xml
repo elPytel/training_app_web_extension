@@ -8,8 +8,14 @@
             aktivuj core a začni klesat směrem dolů, jako bys chtěl sednout na židli. Kolena směřují
             ve směru špiček. Vrať se do výchozí polohy.</description>
             <media>
-                <mediaType>NONE</mediaType>
-                <mediaUrl />
+                <mediaType>IMAGE_GALLERY</mediaType>
+                <mediaUrl>../assets/element-not-found.jpg</mediaUrl>
+                <mediaCheckSum>9296fb8e3a331218db65bec97d363b5a</mediaCheckSum>
+            </media>
+            <media>
+                <mediaType>IMAGE_GALLERY</mediaType>
+                <mediaUrl>../assets/element-not-found.jpg</mediaUrl>
+                <mediaCheckSum>9296fb8e3a331218db65bec97d363b5a</mediaCheckSum>
             </media>
             <muscleGroups>
                 <item>Přední stehna</item>
@@ -23,8 +29,9 @@
             <description>Pozice na dlaních a špičkách, tělo v rovné linii. Ohni lokty a sniž hrudník
             téměř k zemi. Vystrč zpět do výchozí pozice. Lokty směřují dozadu, ne do stran.</description>
             <media>
-                <mediaType>NONE</mediaType>
-                <mediaUrl />
+                <mediaType>IMAGE_GALLERY</mediaType>
+                <mediaUrl>../assets/element-not-found.jpg</mediaUrl>
+                <mediaCheckSum>9296fb8e3a331218db65bec97d363b5a</mediaCheckSum>
             </media>
             <muscleGroups>
                 <item>Hrudník</item>

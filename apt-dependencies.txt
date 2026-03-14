@@ -4,3 +4,4 @@ pylint
 pandoc
 fonts-symbola
 wkhtmltopdf
+md5sum

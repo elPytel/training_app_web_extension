@@ -48,8 +48,13 @@ json2xml: | ${XML_DIR}
 		echo "$(CYAN)Generated $(BLUE)${XML_DIR}/$$base.xml$(RESET) from $$f"; \
 	done'
 
+generate-checksums-doc := "Generate MD5 checksums for media files referenced in XML under ${DATA_DIR}"
+generate-checksums: | ${XML_DIR}
+	@echo "$(YELLOW)Generating$(RESET) media MD5 checksums..."
+	@bash ${SRC_SCRIPT_DIR}/generate-md5-checksums.sh ${DATA_DIR}
+
 xml-lint-doc := "Validate XML files in ${XML_DIR} and ${DATA_DIR} against the schema"
-xml-lint: | ${XML_DIR}
+xml-lint: generate-checksums | ${XML_DIR}
 	@echo "$(YELLOW)Linting$(RESET) XML files via scripts/xml-lint.sh..."
 	@bash ${SRC_SCRIPT_DIR}/xml-lint.sh ${XML_DIR} src/xml/trenink.xsd || (echo "$(RED)Some XML files failed validation$(RESET)" && exit 1)
 	@bash ${SRC_SCRIPT_DIR}/xml-lint.sh ${DATA_DIR} src/xml/trenink.xsd || (echo "$(RED)Some XML files failed validation$(RESET)" && exit 1)
@@ -69,13 +74,22 @@ copy-styles: | ${HTML_DIR}
 		echo "No styles found in ${SRC_STYLE_DIR}"; \
 	fi
 
+copy-assets: | ${HTML_DIR}
+	@echo "$(YELLOW)Copying$(RESET) assets to HTML directory..."
+	@if [ -d "${DATA_DIR}/assets" ]; then \
+		cp -a "${DATA_DIR}/assets" ${HTML_DIR}/ 2>/dev/null || true; \
+		echo "$(GREEN)Copied$(RESET) ${DATA_DIR}/assets to ${HTML_DIR}/assets"; \
+	else \
+		echo "No assets directory found in ${DATA_DIR}"; \
+	fi
+
 html-index-doc := "Generate index.html listing all generated HTML files in ${HTML_DIR}"
 html-index: | ${HTML_DIR}
 	@echo "$(YELLOW)Generating$(RESET) index.html for HTML files..."
 	@bash ${SRC_SCRIPT_DIR}/generate-html-index.sh ${HTML_DIR} || (echo "$(RED)Index generation failed$(RESET)" && exit 1)
 
 html-doc := "Generate all HTML files from XML sources"
-html: copy-styles xml2html html-index | ${HTML_DIR} ${XML_DIR} 
+html: copy-styles copy-assets xml2html html-index | ${HTML_DIR} ${XML_DIR} 
 	@echo "$(GREEN)All HTML files generated successfully.$(RESET)"
 
 clean-doc := "Remove all generated HTML and XML files"
