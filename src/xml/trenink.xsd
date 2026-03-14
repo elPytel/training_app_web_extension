@@ -27,6 +27,16 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <!-- MD5 hex checksum: 32 hex digits (case-insensitive) -->
+  <xs:simpleType name="MD5Hex">
+    <xs:annotation>
+      <xs:documentation>MD5 checksum as 32 hexadecimal digits (0-9, a-f). Example: d41d8cd98f00b204e9800998ecf8427e</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-fA-F]{32}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <!-- (Optional) MuscleGroup enum left in file for reference, not used for muscleGroups list -->
   <xs:simpleType name="MuscleGroup">
     <xs:restriction base="xs:string">
@@ -45,11 +55,12 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- -->
+  <!-- MediaType complex type -->
   <xs:complexType name="MediaType">
     <xs:sequence>
       <xs:element name="mediaType" type="MediaCategory"/>
       <xs:element name="mediaUrl" type="xs:string" minOccurs="0" nillable="true"/>
+      <xs:element name="mediaCheckSum" type="MD5Hex" minOccurs="0" nillable="true"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -59,7 +70,7 @@
       <xs:element name="name" type="xs:string"/>
       <xs:element name="category" type="ExerciseCategory"/>
       <xs:element name="description" type="xs:string" minOccurs="0" nillable="true"/>
-      <xs:element name="media" type="MediaType" minOccurs="0"/>
+      <xs:element name="media" type="MediaType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="muscleGroups" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
