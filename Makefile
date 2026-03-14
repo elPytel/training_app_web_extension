@@ -6,6 +6,7 @@ SRC_XML_DIR := src/xml
 SRC_PY_DIR := src/python
 SRC_STYLE_DIR := src/style
 SRC_SCRIPT_DIR := src/scripts
+SRC_HTML_DIR := src/html
 HTML_DIR := generated/html
 XML_DIR := generated/xml
 DATA_DIR := data
@@ -74,6 +75,15 @@ copy-styles: | ${HTML_DIR}
 		echo "No styles found in ${SRC_STYLE_DIR}"; \
 	fi
 
+copy-html: | ${HTML_DIR}
+	@echo "$(YELLOW)Copying$(RESET) HTML files from src to HTML directory..."
+	@if [ -d "${SRC_HTML_DIR}" ]; then \
+		cp -a ${SRC_HTML_DIR}/. ${HTML_DIR}/ 2>/dev/null || true; \
+		echo "$(GREEN)Copied$(RESET) HTML files to ${HTML_DIR}"; \
+	else \
+		echo "No HTML files found in ${SRC_HTML_DIR}"; \
+	fi
+
 copy-assets: | ${HTML_DIR}
 	@echo "$(YELLOW)Copying$(RESET) assets to HTML directory..."
 	@if [ -d "${DATA_DIR}/assets" ]; then \
@@ -84,7 +94,7 @@ copy-assets: | ${HTML_DIR}
 	fi
 
 html-index-doc := "Generate index.html listing all generated HTML files in ${HTML_DIR}"
-html-index: | ${HTML_DIR}
+html-index: copy-html | ${HTML_DIR}
 	@echo "$(YELLOW)Generating$(RESET) index.html for HTML files..."
 	@bash ${SRC_SCRIPT_DIR}/generate-html-index.sh ${HTML_DIR} || (echo "$(RED)Index generation failed$(RESET)" && exit 1)
 

@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Training XML Builder</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      body { font-family: Arial, sans-serif; padding:16px; }
+      .col { display:inline-block; vertical-align:top; width:48%; margin-right:2%; }
+      label { display:block; margin:6px 0; }
+      fieldset { margin-bottom:12px; }
+      button { margin-top:8px; }
+      pre { background:#f8f8f8; padding:8px; max-height:300px; overflow:auto; }
+    </style>
+  </head>
+  <body>
+    <h1>Training XML Builder</h1>
+
+    <div class="col">
+      <fieldset>
+        <legend>Unit</legend>
+        <label>Client ID: <input id="clientId" type="text"/></label>
+        <label>Unit ID: <input id="unit-id" type="text"/></label>
+        <label>Name: <input id="unit-name" type="text"/></label>
+        <label>Note: <input id="unit-note" type="text"/></label>
+      </fieldset>
+
+      <fieldset id="def-form">
+        <legend>Add Exercise Definition</legend>
+        <label>ID: <input id="def-id" type="text"/></label>
+        <label>Name: <input id="def-name" type="text"/></label>
+        <label>Category:
+          <select id="def-category">
+            <option value="STRENGTH">STRENGTH</option>
+            <option value="CARDIO">CARDIO</option>
+            <option value="MOBILITY">MOBILITY</option>
+          </select>
+        </label>
+        <label>Description: <textarea id="def-description"></textarea></label>
+        <label>Media Type:
+          <select id="def-mediaType">
+            <option value="NONE">NONE</option>
+            <option value="IMAGE_URL">IMAGE_URL</option>
+            <option value="IMAGE_GALLERY">IMAGE_GALLERY</option>
+            <option value="YOUTUBE">YOUTUBE</option>
+          </select>
+        </label>
+        <label>Media URL: <input id="def-mediaUrl" type="text"/></label>
+        <label>Muscles (comma separated): <input id="def-muscles" type="text" placeholder="e.g. CHEST,TRICEPS"/></label>
+        <label><input id="def-isDefault" type="checkbox"/> Default</label>
+        <button id="def-add" type="button">Add Definition</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Exercise Definitions</legend>
+        <ul id="defs-list"></ul>
+      </fieldset>
+    </div>
+
+    <div class="col">
+      <fieldset id="unit-ex-form">
+        <legend>Add Exercise To Unit</legend>
+        <label>Exercise ID (ref): <input id="unit-exerciseId" type="text"/></label>
+        <label><input id="ue-distance" type="checkbox"/> isDistanceEnabled</label>
+        <label><input id="ue-repsEnabled" type="checkbox"/> isRepsEnabled</label>
+        <label><input id="ue-restEnabled" type="checkbox"/> isRestEnabled</label>
+        <label><input id="ue-rirEnabled" type="checkbox"/> isRirEnabled</label>
+        <label><input id="ue-timeEnabled" type="checkbox"/> isTimeEnabled</label>
+        <label><input id="ue-weightEnabled" type="checkbox"/> isWeightEnabled</label>
+        <label>Order index: <input id="ue-order" type="number" min="1"/></label>
+        <label>Reps: <input id="ue-reps" type="number" min="0"/></label>
+        <label>Rest (s): <input id="ue-rest" type="number" min="0"/></label>
+        <label>Sets: <input id="ue-sets" type="number" min="0"/></label>
+        <button id="unit-add" type="button">Add To Unit</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Exercises In Unit</legend>
+        <ol id="units-list"></ol>
+      </fieldset>
+    </div>
+
+    <div style="clear:both; margin-top:16px">
+      <button id="btn-preview" type="button">Preview XML</button>
+      <button id="btn-download" type="button">Download XML</button>
+    </div>
+
+    <h2>Preview</h2>
+    <pre id="preview" aria-label="XML preview"></pre>
+
+    <script src="app.js"></script>
+  </body>
+</html>
