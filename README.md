@@ -2,6 +2,8 @@
 
 Krátký návod a popis projektu pro generování webové prezentace cvičení.
 
+Aplikace pro Android: [zde](https://github.com/Sunflavoured/client_training_android_app)
+
 **Co to dělá:**
 - **Konverze:** převádí JSON → XML (skriptem) a XML → HTML pomocí XSLT.
 - **Validace:** XML soubory se validují proti XSD (`src/xml/trenink.xsd`) pomocí `xmllint`.
